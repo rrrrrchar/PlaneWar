@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
         input.EnableGamePlayInput();
     }
 
+
+
     //订阅事件方便 移动/停止移动的实现
     private void OnEnable()
     {
@@ -41,11 +43,25 @@ public class Player : MonoBehaviour
     {
         //Vector2 moveAmount = moveinput * movespeed;
         rigidbody.velocity = moveinput * movespeed;
+
+        StartCoroutine(Co_MovePositionLimit());
     }
 
     void StopMoveFunc()
     {
         rigidbody.velocity = Vector2.zero;
+
+        StopCoroutine(Co_MovePositionLimit());
     }
 
+    //移动限制协程
+    IEnumerator Co_MovePositionLimit()
+    {
+        while(true)
+        {
+            transform.position = Viewport.Instance.PlayerMoveablePostion(transform.position);
+
+            yield return null;
+        }
+    }
 }
