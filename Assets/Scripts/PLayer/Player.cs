@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     [SerializeField] PlayerInput input;
     new Rigidbody2D rigidbody;
 
+
+
     [SerializeField]float movespeed = 10f;
     //padding 的大小
     //[SerializeField] float paddingx;
@@ -28,6 +30,21 @@ public class Player : MonoBehaviour
     float rotationAngle = 28f;
     //移动逻辑要用到的临时协程
     Coroutine TempCoMove;
+
+
+
+    //开火
+    //子弹对象
+    [SerializeField] GameObject projectile;
+    //瞄准点
+    [SerializeField] Transform projectilePosition;
+    //[SerializeField]
+    //攻击间隔
+    float fireInerval=0.1f;
+    private WaitForSeconds waitForSeconds;
+
+
+
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -38,6 +55,8 @@ public class Player : MonoBehaviour
         rigidbody.gravityScale = 0f;
         //激活动作表
         input.EnableGamePlayInput();
+        //攻击间隔初始化
+        waitForSeconds = new WaitForSeconds(fireInerval);
     }
 
 
@@ -47,14 +66,19 @@ public class Player : MonoBehaviour
     {
         input.OnMoveEvent += MoveFunc;
         input.OnStopMoveEvent += StopMoveFunc;
+        input.OnFireEvent += FireFunc;
+        input.OnStopFireEvent += StopFireFunc;
     }
     //取消订阅
     private void OnDisable()
     {
         input.OnMoveEvent -= MoveFunc;
         input.OnStopMoveEvent -= StopMoveFunc;
+        input.OnFireEvent -= FireFunc;
+        input.OnStopFireEvent -= StopFireFunc;
     }
 
+    #region 移动
     void MoveFunc(Vector2 moveinput)
     {
         //Vector2 moveAmount = moveinput.normalized * movespeed;
@@ -82,7 +106,7 @@ public class Player : MonoBehaviour
         TempCoMove=StartCoroutine(Co_Move(Vector2.zero,decelerdTime,Quaternion.identity));
         StopCoroutine(Co_MovePositionLimit());
     }
-
+    
     //移动协程
     IEnumerator Co_Move(Vector2 moveVelocity,float type,Quaternion rotation)
     {
@@ -112,4 +136,30 @@ public class Player : MonoBehaviour
             yield return null;
         }
     }
+
+    #endregion
+
+
+    #region 开火
+    void FireFunc()
+    {
+        StartCoroutine("Co_Fire");
+    }
+
+    void StopFireFunc()
+    {
+        StopCoroutine("Co_Fire");
+    }
+    IEnumerator Co_Fire()
+    {
+        
+        while (true)
+        {
+            Instantiate(projectile, projectilePosition.position, Quaternion.identity);
+            yield return waitForSeconds;
+        }
+        
+    }
+
+    #endregion
 }

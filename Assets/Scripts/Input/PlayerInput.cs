@@ -16,6 +16,10 @@ public class PlayerInput : ScriptableObject, PlayerInputActions.IGamePlayActions
     // 移动和停止移动事件
     public event UnityAction<Vector2> OnMoveEvent = delegate { };
     public event UnityAction OnStopMoveEvent = delegate { };
+
+    //射击事件
+    public event UnityAction OnFireEvent = delegate { };
+    public event UnityAction OnStopFireEvent = delegate { };
     private void OnEnable()
     {
         //初始化
@@ -59,5 +63,20 @@ public class PlayerInput : ScriptableObject, PlayerInputActions.IGamePlayActions
             OnStopMoveEvent.Invoke();
         }
         
+    }
+
+    public void OnFire(InputAction.CallbackContext context)
+    {
+        //按住按键时调用 开火
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnFireEvent.Invoke();
+        }
+
+        //松开按键时调用 停止开火
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            OnStopFireEvent.Invoke();
+        }
     }
 }
