@@ -46,15 +46,18 @@ public class PlayerInput : ScriptableObject, PlayerInputActions.IGamePlayActions
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        
         //按住按键时调用 onMove事件
         if(context.phase ==InputActionPhase.Performed)
         {
             OnMoveEvent.Invoke( context.ReadValue<Vector2>() );
         }
+        
         //松开按键时调用 onStopMove事件
-        if(context.phase ==InputActionPhase.Canceled)
+        if (context.phase ==InputActionPhase.Canceled)
         {
             OnStopMoveEvent.Invoke();
         }
+        
     }
 }

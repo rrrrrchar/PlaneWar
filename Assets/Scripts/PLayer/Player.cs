@@ -8,6 +8,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
+    //下面没有序列化直接再脚本写死的都是懒得调
+
+
     [SerializeField] PlayerInput input;
     new Rigidbody2D rigidbody;
 
@@ -56,11 +59,12 @@ public class Player : MonoBehaviour
     {
         //Vector2 moveAmount = moveinput.normalized * movespeed;
         //rigidbody.velocity = moveinput.normalized * movespeed;
-
+        
         if (TempCoMove != null)
         {
             StopCoroutine(TempCoMove);
         }
+        //用一个四元数表示绕哪个轴旋转
         //Quaternion moveRotation = Quaternion.AngleAxis( rotationAngle * moveinput.y,Vector3.right);
         TempCoMove=StartCoroutine(Co_Move(moveinput.normalized * movespeed,accTime , Quaternion.AngleAxis(rotationAngle * moveinput.y, Vector3.right)));
         StartCoroutine(Co_MovePositionLimit());
@@ -68,6 +72,7 @@ public class Player : MonoBehaviour
 
     void StopMoveFunc()
     {
+        
         //rigidbody.velocity = Vector2.zero;
         if (TempCoMove != null)
         {
