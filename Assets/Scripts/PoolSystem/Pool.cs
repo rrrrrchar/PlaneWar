@@ -5,13 +5,17 @@ using UnityEngine;
 [System.Serializable]public class Pool
 {
     public GameObject Prefab => prefab;
+    
+    
+    public int Size =>size;
+    public int runtimeSize => queue.Count;
 
     //对象池要维护的对象
     [SerializeField] GameObject prefab;
     //用队列维护
     Queue<GameObject> queue;
     //对象池大小
-    [SerializeField] int poolSize;
+    [SerializeField] int size;
     //初始化对象池
 
     //
@@ -20,7 +24,7 @@ using UnityEngine;
     {
         queue = new Queue<GameObject>();
         this.parent = parent;
-        for (var i = 0; i < poolSize; i++)
+        for (var i = 0; i < size; i++)
         {
             queue.Enqueue(CreateObjForPool());
         }

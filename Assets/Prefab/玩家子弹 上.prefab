@@ -4964,7 +4964,7 @@ GameObject:
   - component: {fileID: 1648105944758826012}
   - component: {fileID: -6678481851876836164}
   m_Layer: 0
-  m_Name: "\u73A9\u5BB6\u5B50\u5F39"
+  m_Name: "\u73A9\u5BB6\u5B50\u5F39 \u4E0A"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5000,7 +5000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  moveDirection: {x: 1, y: 0}
+  moveDirection: {x: 1, y: 0.05}
 --- !u!114 &-6678481851876836164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5013,3 +5013,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b1bb1d5e70debc4d8657cf3cf9ad84f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyGameObj: 0
+  leftTime: 3

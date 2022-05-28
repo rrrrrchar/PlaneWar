@@ -6,10 +6,10 @@ using UnityEngine;
 public class AutoDeactivate : MonoBehaviour
 {
     //是否要禁用
-    //[SerializeField] 
+    [SerializeField] 
     bool destroyGameObj=true;
     //强制销毁子弹的时间
-    //[SerializeField] 
+    [SerializeField] 
     float leftTime = 3f;
     WaitForSeconds waitForSeconds;
     private void Awake()

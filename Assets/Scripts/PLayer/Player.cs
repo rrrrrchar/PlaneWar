@@ -35,9 +35,15 @@ public class Player : MonoBehaviour
 
     //开火
     //子弹对象
-    [SerializeField] GameObject projectile;
+    [SerializeField] GameObject projectileUp;
+    [SerializeField] GameObject projectileMid;
+    [SerializeField] GameObject projectileDown;
+    //武器威力
+    [SerializeField,Range(0,2)] int weaponPower = 0;
     //瞄准点
-    [SerializeField] Transform projectilePosition;
+    [SerializeField] Transform projectilePositionUp;
+    [SerializeField] Transform projectilePositionMid;
+    [SerializeField] Transform projectilePositionDown;
     //[SerializeField]
     //攻击间隔
     float fireInerval=0.1f;
@@ -155,7 +161,31 @@ public class Player : MonoBehaviour
         
         while (true)
         {
-            Instantiate(projectile, projectilePosition.position, Quaternion.identity);
+            switch (weaponPower)
+            {
+                case 0:
+
+                    PoolManager.release(projectileMid, projectilePositionMid.position);
+                    //Instantiate(projectileMid, projectilePositionMid.position, Quaternion.identity);
+                    break;
+                case 1:
+                    PoolManager.release(projectileUp, projectilePositionMid.position);
+                    PoolManager.release(projectileMid, projectilePositionMid.position);
+                    //Instantiate(projectileUp, projectilePositionUp.position, Quaternion.identity);
+                   // Instantiate(projectileMid, projectilePositionMid.position, Quaternion.identity);
+                    break;
+                case 2:
+                    PoolManager.release(projectileUp, projectilePositionMid.position);
+                    PoolManager.release(projectileMid, projectilePositionMid.position);
+                    PoolManager.release(projectileDown, projectilePositionMid.position);
+                    //Instantiate(projectileUp, projectilePositionUp.position, Quaternion.identity);
+                    //Instantiate(projectileMid, projectilePositionMid.position, Quaternion.identity);
+                    //Instantiate(projectileDown, projectilePositionDown.position, Quaternion.identity);
+                    break;
+                default:
+                    break;
+            }
+            
             yield return waitForSeconds;
         }
         
