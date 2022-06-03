@@ -8,20 +8,22 @@ public class PoolManager : MonoBehaviour
     
     //玩家子弹池子
     [SerializeField] Pool[] playerProjectilePool;
-
-
+    //敌人子弹
+    [SerializeField] Pool[] enemyProjectilePool;
      static Dictionary<GameObject, Pool> dict;
 
     private void Start()
     {
         dict = new Dictionary<GameObject, Pool>();
         init(playerProjectilePool);
+        init(enemyProjectilePool);
     }
     //实时检测池子应有的大小
     #if UNITY_EDITOR
     private void OnDestroy()
     {
         checkPoolSize(playerProjectilePool);
+        checkPoolSize(enemyProjectilePool);
     }
     #endif
     void checkPoolSize(Pool[] pools)

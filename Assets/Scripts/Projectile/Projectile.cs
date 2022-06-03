@@ -6,7 +6,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField]private float moveSpeed = 10f;
-    [SerializeField] Vector2 moveDirection;
+    [SerializeField]protected Vector2 moveDirection;
 
     private void OnEnable()
     {

@@ -7,18 +7,20 @@ public class Viewport : Singleton<Viewport>
     float minX,maxX;
     float minY,maxY;
 
+    float middleX;
     private void Start()
     {
         Camera camera =Camera.main;
         //左下角坐标
         Vector2 bottomleft = camera.ViewportToWorldPoint(new Vector3(0f,0f));
-
         minX = bottomleft.x;
         minY = bottomleft.y;
-
         Vector2 topright = camera.ViewportToWorldPoint(new Vector3(1f, 1f));
         maxX = topright.x;
         maxY = topright.y;
+
+
+        middleX=camera.ViewportToWorldPoint(new Vector3(0.5f,0.5f,0f)).x;
     }
 
     //玩家可移动的距离
@@ -31,4 +33,25 @@ public class Viewport : Singleton<Viewport>
         res.y=Mathf.Clamp(curPos.y, minY + paddingy, maxY - paddingy);
         return res;
     }
+
+    //enemy出生点随机
+    public Vector3 RandomEnemySpawnPosition(float paddingx = 0.8f, float paddingy = 0.22f)
+    {
+        Vector3 res = Vector3.zero;
+        res.x = maxX+paddingx;
+        res.y = Random.Range(minY+paddingy, maxY-paddingy);
+
+        return res;
+    }
+
+    
+    public Vector3 RandomRightHalfPosition(float paddingx = 0.8f, float paddingy = 0.22f)
+    {
+        Vector3 res = Vector3.zero;
+        res.x = Random.Range(middleX, maxX - paddingx);
+        res.y = Random.Range(minY + paddingy, maxY - paddingy);
+
+        return res;
+    }
+
 }
