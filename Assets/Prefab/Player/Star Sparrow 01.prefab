@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 455698443}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.85, y: 0, z: 0}
+  m_LocalPosition: {x: 0.85, y: 0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1730771589}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.85, y: 0, z: 0}
+  m_LocalPosition: {x: 0.85, y: -0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -29237,15 +29237,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f0c6b971fab1db4a802a1f8ea13c592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathVFX: {fileID: 0}
+  maxHealth: 100
+  regenerateHealth: 1
+  healthRegenerateTime: 2
+  healthRegeneratePercent: 0.709
   input: {fileID: 11400000, guid: eca24f84fe513cc41b14252e9d131671, type: 2}
   movespeed: 10
-  projectileUp: {fileID: 0}
-  projectileMid: {fileID: 0}
-  projectileDown: {fileID: 0}
+  projectileUp: {fileID: 1648105944758826010, guid: 25a15db05ee80924cb2b082e4438c8a0, type: 3}
+  projectileMid: {fileID: 1648105944758826010, guid: bfff894b1d7e8324abdcd150bc16f16f, type: 3}
+  projectileDown: {fileID: 1648105944758826010, guid: 1a956ea897cdd0a4193c5b3f150feeb5, type: 3}
   weaponPower: 0
-  projectilePositionUp: {fileID: 0}
-  projectilePositionMid: {fileID: 0}
-  projectilePositionDown: {fileID: 0}
+  projectilePositionUp: {fileID: 455698444}
+  projectilePositionMid: {fileID: 7901680986401887051}
+  projectilePositionDown: {fileID: 1730771590}
 --- !u!1 &6758096032694626173
 GameObject:
   m_ObjectHideFlags: 0

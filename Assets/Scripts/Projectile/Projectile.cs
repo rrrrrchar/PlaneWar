@@ -8,7 +8,8 @@ public class Projectile : MonoBehaviour
     [SerializeField]private float moveSpeed = 10f;
     [SerializeField]protected Vector2 moveDirection;
 
-    private void OnEnable()
+    protected GameObject target;
+    protected virtual void OnEnable()
     {
         StartCoroutine(Co_MoveDirectly());
     }

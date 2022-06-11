@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 214778051926960353}
   - component: {fileID: 1411126754}
+  - component: {fileID: 2254078621830773336}
   m_Layer: 7
   m_Name: Enemy01
-  m_TagString: Player
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,6 +57,20 @@ MonoBehaviour:
   projectile:
   - {fileID: 1297214548276222882, guid: 9319b0ae12ec73c40a086cec342c29dc, type: 3}
   waist: {fileID: 5264443367940498900}
+--- !u!114 &2254078621830773336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214778051926960383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3750ba465b6f8e7498019138cd0d1614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathVFX: {fileID: 0}
+  maxHealth: 2
 --- !u!1 &2100968527171872563
 GameObject:
   m_ObjectHideFlags: 0

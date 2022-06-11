@@ -6,11 +6,17 @@ using UnityEngine;
 
 //添加2D刚体
 [RequireComponent(typeof(Rigidbody2D))]
-public class Player : MonoBehaviour
+public class Player : Character
 {
     //下面没有序列化直接再脚本写死的都是懒得调
+    [SerializeField] bool regenerateHealth = true;
+    [SerializeField] float healthRegenerateTime;
+    [SerializeField ,Range(0f,1f)] float healthRegeneratePercent;
+    WaitForSeconds waitHealthRegenerateTime;
+    Coroutine TempCoHealthRegenerate;
 
 
+    [Header("----------移动")]
     [SerializeField] PlayerInput input;
     new Rigidbody2D rigidbody;
 
@@ -63,13 +69,15 @@ public class Player : MonoBehaviour
         input.EnableGamePlayInput();
         //攻击间隔初始化
         waitForSeconds = new WaitForSeconds(fireInerval);
+        waitHealthRegenerateTime = new WaitForSeconds(healthRegenerateTime);
     }
 
 
 
     //订阅事件方便 移动/停止移动的实现
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         input.OnMoveEvent += MoveFunc;
         input.OnStopMoveEvent += StopMoveFunc;
         input.OnFireEvent += FireFunc;
@@ -189,6 +197,26 @@ public class Player : MonoBehaviour
             yield return waitForSeconds;
         }
         
+    }
+
+    #endregion
+
+
+    #region 受伤
+
+    public override void TakeDamege(float damage)
+    {
+        base.TakeDamege(damage);
+
+        if(gameObject.activeSelf)
+        {
+            if(regenerateHealth)
+            {
+                if (TempCoHealthRegenerate != null)
+                    StopCoroutine(TempCoHealthRegenerate);
+                TempCoHealthRegenerate=StartCoroutine(CO_HeathRegenerate(waitHealthRegenerateTime, healthRegeneratePercent));
+            }
+        }
     }
 
     #endregion

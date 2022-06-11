@@ -50,6 +50,7 @@ public class PlayerInput : ScriptableObject, PlayerInputActions.IGamePlayActions
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        //if( context.performed)
         
         //按住按键时调用 onMove事件
         if(context.phase ==InputActionPhase.Performed)
